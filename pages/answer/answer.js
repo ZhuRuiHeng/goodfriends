@@ -14,6 +14,7 @@ Page({
    },
 
   onLoad: function (options) {
+    console.log('options:', options);
     wx.hideShareMenu({});
     wx.setNavigationBarColor({
       frontColor: '#ffffff',
@@ -57,6 +58,7 @@ console.log("onload id",set_number,uid);
     var set_number = that.data.set_number;
     var uid = that.data.uid;
     var array = that.data.array;
+    
     
 
     console.log("onshow id", uid,set_number,u_avatar);

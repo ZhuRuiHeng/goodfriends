@@ -48,9 +48,13 @@ Page({
     // });  
 
     wx.hideShareMenu();
+    if(!wx.getStorageSync('set_number')){
+      app.getUserInfo(function () {})
+    }
   },
 
   onShow: function () {
+    console.log('set_number:', wx.getStorageSync('set_number'), 'uid:',wx.getStorageSync('uid'));
     var that = this;
     that.setData({
       background: wx.getStorageSync('background'),
@@ -59,13 +63,16 @@ Page({
       userImg: wx.getStorageSync('userImg'),
       userIcon: wx.getStorageSync('userIcon'),
       color: wx.getStorageSync('color'),
-      sex: wx.getStorageSync('sex')//"sex":1,//1 男 2女
+      sex: wx.getStorageSync('sex'),//"sex":1,//1 男 2女
+      set_number:wx.getStorageSync('set_number')
     })
+
+
     app.getUserInfo(function(){  
       var avatar = wx.getStorageSync("avatarUrl");
       var nickname = wx.getStorageSync("nickName");
+      
       var sign = app.data.sign;
-      var set_number;
 
 
       // // 生成无限制二维码按钮
@@ -234,8 +241,10 @@ console.log("sign",sign);
           }         
           var question = res.data.question;
           var set_number = question.set_number;
+          wx.setStorageSync("set_number", set_number);
           console.log(question.index);
           that.setData({
+            set_number:set_number,
             question_type: 'system',
             selftitle: '',
             text1: '',
